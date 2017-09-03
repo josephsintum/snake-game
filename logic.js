@@ -7,6 +7,8 @@ function startGame() {
   snake = new elt("teal", "snake");
   food = new elt("red", "food");
 
+  tail = 3;
+
   gameArea.start();
 }
 
@@ -31,7 +33,7 @@ function elt(color, type) {
   this.width = this.height = unit;
   this.type = type;
 
-  //
+  // methods for snake object
   if (this.type === "snake") {
     this.x = this.y = unit;
     this.speedX = this.speedY = 0;
@@ -61,13 +63,16 @@ function elt(color, type) {
         ctx.fillStyle = color;
         ctx.fillRect(tailArray[i].x, tailArray[i].y, unit, unit);
         // check if snake eat itself
+        if (snake.x === tailArray[i].x && snake.y === tailArray[i].y) {
+          snakeDead();
+        }
       }
       tailArray.push({x:this.x, y:this.y});
 
       while (tailArray.length>tail) {
         tailArray.shift();
       }
-
+      // updating snake head position
       ctx = gameArea.context;
       ctx.fillStyle = color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -87,6 +92,8 @@ function elt(color, type) {
     }
 
   } else {
+    // methods for food object
+
     //making a random food position
     this.x = randNum();
     this.y = randNum();
@@ -105,6 +112,11 @@ function elt(color, type) {
     }
   }
 
+}
+
+// snake killing function
+function snakeDead() {
+  tail = 3
 }
 
 //random number function
