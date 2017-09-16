@@ -121,9 +121,7 @@ function snakeDead() {
 
 //random number function
 var randNum = function() {
-  var randomNum = Math.floor(Math.random() * ((gameArea.canvas.height - unit) / unit)) * unit;
-
-  return randomNum;
+  return Math.floor(Math.random() * ((gameArea.canvas.height - unit) / unit)) * unit;
 }
 
 // key press eventlistener
